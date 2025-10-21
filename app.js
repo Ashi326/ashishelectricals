@@ -89,15 +89,21 @@ class WebsiteApp {
         }
     }
 
-    // Form Validation Setup
+        // Form Validation Setup
     setupFormValidation() {
         const form = document.getElementById('contactForm');
         if (form) {
             form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleFormSubmission(form);
+                // Validate form first
+                const isValid = this.validateFormBeforeSubmit(form);
+                
+                // Only prevent submission if validation fails
+                if (!isValid) {
+                    e.preventDefault();
+                }
+                // If valid, let the form submit naturally to FormSubmit
             });
-
+    
             // Real-time validation
             const inputs = form.querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
@@ -110,16 +116,43 @@ class WebsiteApp {
             });
         }
     }
-
+    
+    // Validate form before submission (returns true/false)
+    validateFormBeforeSubmit(form) {
+        const inputs = form.querySelectorAll('input, select, textarea');
+        let isValid = true;
+    
+        // Validate all fields
+        inputs.forEach(input => {
+            if (!this.validateField(input)) {
+                isValid = false;
+            }
+        });
+    
+        // Focus on first error field if validation fails
+        if (!isValid) {
+            const firstError = form.querySelector('.form__error:not(:empty)');
+            if (firstError) {
+                const errorField = firstError.id.replace('Error', '');
+                const field = document.getElementById(errorField);
+                if (field) {
+                    field.focus();
+                }
+            }
+        }
+    
+        return isValid;
+    }
+    
     // Validate individual field
     validateField(field) {
         const value = field.value.trim();
         const fieldName = field.name;
         let errorMessage = '';
-
+    
         // Clear previous error
         this.clearFieldError(field);
-
+    
         // Required field validation
         if (field.required && !value) {
             errorMessage = `${this.getFieldLabel(fieldName)} is required.`;
@@ -148,14 +181,14 @@ class WebsiteApp {
                     break;
             }
         }
-
+    
         if (errorMessage) {
             this.showFieldError(field, errorMessage);
             return false;
         }
         return true;
     }
-
+    
     // Show field error
     showFieldError(field, message) {
         const errorElement = document.getElementById(field.name + 'Error');
@@ -164,7 +197,7 @@ class WebsiteApp {
             field.style.borderColor = '#dc3545';
         }
     }
-
+    
     // Clear field error
     clearFieldError(field) {
         const errorElement = document.getElementById(field.name + 'Error');
@@ -173,7 +206,7 @@ class WebsiteApp {
             field.style.borderColor = '';
         }
     }
-
+    
     // Get field label
     getFieldLabel(fieldName) {
         const labels = {
@@ -185,18 +218,19 @@ class WebsiteApp {
         };
         return labels[fieldName] || fieldName;
     }
-
+    
     // Email validation
     isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
-
+    
     // Phone validation
     isValidPhone(phone) {
         const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
         return phoneRegex.test(phone);
     }
+
 
     // Handle form submission
     handleFormSubmission(form) {
