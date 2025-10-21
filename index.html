@@ -182,7 +182,7 @@
             </div>
         </section>
 
-        <!-- Contact Page -->
+       <!-- Contact Page -->
         <section class="page" id="contact">
             <div class="container">
                 <h2 class="page__title">Get a Quote</h2>
@@ -190,7 +190,15 @@
                 
                 <div class="contact__content">
                     <div class="contact__form-section">
-                        <form class="contact__form" id="contactForm">
+                        <form class="contact__form" id="contactForm" 
+                              action="https://formsubmit.co/ashishverma83a6@gmail.com" 
+                              method="POST">
+                            
+                            <!-- FormSubmit Configuration (Hidden Fields) -->
+                            <input type="hidden" name="_subject" value="New Inquiry from ASHISH Electricals Website">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_next" value="https://ashi326.github.io/ashishelectricals/contact.html?success=true">
+                            
                             <div class="form__group">
                                 <label for="name" class="form__label">Full Name *</label>
                                 <input type="text" id="name" name="name" class="form__input" required>
@@ -213,12 +221,12 @@
                                 <label for="service" class="form__label">Service Type *</label>
                                 <select id="service" name="service" class="form__select" required>
                                     <option value="">Select a service</option>
-                                    <option value="residential">Residential</option>
-                                    <option value="commercial">Commercial</option>
-                                    <option value="industrial">Industrial</option>
-                                    <option value="maintenance">Maintenance</option>
-                                    <option value="emergency">Emergency</option>
-                                    <option value="other">Other</option>
+                                    <option value="Residential">Residential</option>
+                                    <option value="Commercial">Commercial</option>
+                                    <option value="Industrial">Industrial</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                    <option value="Emergency">Emergency</option>
+                                    <option value="Other">Other</option>
                                 </select>
                                 <span class="form__error" id="serviceError"></span>
                             </div>
@@ -277,6 +285,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->
