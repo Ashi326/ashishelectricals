@@ -339,3 +339,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// Show success popup if redirected with success parameter
+window.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        document.getElementById('successPopup').style.display = 'flex';
+        
+        // Remove success parameter from URL without reloading
+        const newUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+    }
+});
+
+// Close popup function
+function closePopup() {
+    document.getElementById('successPopup').style.display = 'none';
+}
+
+// Close popup when clicking outside
+document.addEventListener('click', function(e) {
+    const popup = document.getElementById('successPopup');
+    if (e.target === popup) {
+        closePopup();
+    }
+});
+
