@@ -195,9 +195,10 @@
                               method="POST">
                             
                             <!-- FormSubmit Configuration (Hidden Fields) -->
-                          <!--  <input type="hidden" name="_subject" value="New Inquiry from ASHISH Electricals Website">
+                           
+                            <input type="hidden" name="_next" value="https://ashi326.github.io/?success=true">
+                            <input type="hidden" name="_subject" value="New Inquiry from ASHISH Electricals Website">
                             <input type="hidden" name="_template" value="table">
-                            <input type="hidden" name="_next" value="https://ashi326.github.io/#contact"> -->
                             <input type="hidden" name="_captcha" value="false">
                             <!--<input type="hidden" name="_next" value="https://ashi326.github.io/ashishelectricals/contact.html?success=true">
                             -->
@@ -290,6 +291,19 @@
 
     </main>
 
+    <!-- Success Popup Modal -->
+    <div id="successPopup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <div class="popup-icon">✅</div>
+            <h2>Thank You!</h2>
+            <p>Your inquiry has been submitted successfully.</p>
+            <p>We'll contact you within 24 hours.</p>
+            <button onclick="closePopup()" class="btn btn--primary">Close</button>
+        </div>
+    </div>
+
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -319,5 +333,6 @@
     </footer>
 
     <script src="app.js"></script>
+    
 </body>
 </html>
